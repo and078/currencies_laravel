@@ -5,7 +5,7 @@ const UserInput = (props) => {
             <h1>{props.currencyName}</h1>
             <input
                 className='form-control'
-                type="text"
+                type="number" step="0.01"
                 id={props.currencyName}
                 onInput={props.onChange}
                 value={props.textValue}

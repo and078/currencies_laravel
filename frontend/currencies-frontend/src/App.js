@@ -35,25 +35,6 @@ function App() {
     })
       .then(res => res.json())
       .then(data => {
-
-      //   const setCalls = {
-      //     usd: () => {setUsd(data.usd); console.log(data.usd)},
-      //     ron: () => {setRon(data.ron); console.log(data.ron)},
-      //     rub: () => {setRub(data.rub); console.log(data.rub)},
-      //     uah: () => {setUah(data.uah); console.log(data.uah)},
-      //     gbp: () => {setGbp(data.gbp); console.log(data.gbp)},
-      //     eur: () => {setEur(data.eur); console.log(data.eur)},
-      //     mdl: () => {setMdl(data.mdl); console.log(data.mdl)},
-      //   }
-      //   // Object.keys(setCalls).forEach(el => console.log(typeof(el)))
-
-      //   for(const key in setCalls) {
-      //     if (key !== currentId) {
-      //       setCalls[key]();
-      //       console.log(key);
-      //     }
-      //   }
-      //   console.log(data);
         setUsd(data.usd);
         setRon(data.ron);
         setRub(data.rub);
