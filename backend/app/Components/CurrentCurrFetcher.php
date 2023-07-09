@@ -4,26 +4,44 @@ namespace App\Components;
 
 use App\Components\DateCalculator;
 use App\Components\FetchDataClient;
+use App\Services\Factories\FetchDataClientFactory;
+use Exception;
+use Symfony\Component\HttpKernel\Log\Logger;
 
 class CurrentCurrFetcher
 {
-    public static function fetchData()
-    {
-        $dateCalculator = new DateCalculator();
-        $start = $dateCalculator->getWeekAgoTime();
-        $stop = $dateCalculator->getToday();
+    public function __construct(
+        private readonly FetchDataClientFactory $fetcherFactory,
+        private readonly DateCalculator $dateCalculator,
+        private readonly Logger $logger,
+    ) {
+    }
 
-        $fetch = new FetchDataClient();
-        $result = $fetch->client->request('GET', "?start={$start}&stop={$stop}");
+    /**
+     * Fetches data from Api
+     *
+     * @throws Exception
+     */
+    public function fetchData(): array
+    {
+        $start = $this->dateCalculator->getWeekAgoTime();
+        $stop = $this->dateCalculator->getToday();
+
+        $fetcher = $this->fetcherFactory->create();
+
+        $result = $fetcher->getClient()->request('GET', "?start={$start}&stop={$stop}");
         $dataFromApi = json_decode($result->getBody()->getContents(), true);
 
-        $dataFromapiReduced = array();
+        $dataFromApiReducedArray = [];
+
         foreach($dataFromApi as $key => $value) {
-            $dataFromapiReduced[$key] = $value[6][1];
+            // Get rid of [1], try current(), end()
+            $dataFromApiReducedArray[$key] = $value[6][1];
         }
 
         unset($dataFromApi);
 
-        return $dataFromapiReduced;
+        return $dataFromApiReducedArray;
+
     }
 }

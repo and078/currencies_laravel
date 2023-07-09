@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Components;
-
+/**
+ *
+ */
 class DateCalculator
 {
-    private $startTime;
-    private $msPerDay;
-    private $msNow;
+    private const SIX_DAYS = 6;
 
+    private int $startTime;
+    private int $msPerDay;
+    private int $msNow;
+
+    /**
+     * Construct
+     */
     public function __construct()
     {
         $this->startTime = 82800000;
@@ -15,13 +22,19 @@ class DateCalculator
         $this->msNow = (int)(floor(microtime(true) * 1000));
     }
 
-    public function getToday()
+    /**
+     *
+     */
+    public function getToday(): int
     {
         return (int)(floor(($this->msNow - $this->startTime) / $this->msPerDay)) * $this->msPerDay + $this->startTime;
     }
 
-    public function getWeekAgoTime()
+    /**
+     *
+     */
+    public function getWeekAgoTime(): int
     {
-        return $this->getToday() - ($this->msPerDay * 6);
+        return $this->getToday() - ($this->msPerDay * self::SIX_DAYS);
     }
 }

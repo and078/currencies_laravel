@@ -3,25 +3,47 @@
 namespace App\Actions;
 
 use App\Components\CurrentCurrFetcher;
+use Symfony\Component\HttpKernel\Log\Logger;
+use Exception;
 
 class ProcessAction
 {
-    public function handle($inputData)
+
+    /**
+     * Constructor
+     */
+    public function __construct(
+        private readonly CurrentCurrFetcher $fetcher,
+        private readonly Logger $logger,
+    ) {
+    }
+
+    /**
+     * Handles
+     */
+    public function handle(array $inputData)
     {
-        $currentCurrency = $inputData['current_currency'];
+        try {
+            [
+                'current_currency' => $currentCurrency,
+            ] = $inputData;
 
-        $inputNumber = floatval($inputData[$currentCurrency]);
+            $inputNumber = floatval($currentCurrency);
 
-        $dataFromApi = CurrentCurrFetcher::fetchData();
+            $dataFromApi = $this->fetcher->fetchData();
 
-        $arrayToEncode = array();
+            $arrayToEncode = [];
 
-        $dataFromApi['mdl'] = 1.0;
+            $dataFromApi['mdl'] = 1.0;
 
-        foreach($dataFromApi as $key => $value) {
-            $arrayToEncode[$key] = round(($inputNumber * floatval($dataFromApi[$currentCurrency])) / floatval($value), 2);
+
+            foreach ($dataFromApi as $key => $value) {
+                $arrayToEncode[$key] = round(($inputNumber * floatval($dataFromApi[$currentCurrency])) / floatval($value), 2);
+            }
+
+            return json_encode($arrayToEncode);
+        } catch (Exception $exception) {
+            $this->logger->log('error', $exception);
         }
-
-        return json_encode($arrayToEncode);
     }
 }

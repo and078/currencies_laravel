@@ -16,6 +16,7 @@ use App\Http\Controllers\CalcController;
 */
 
 Route::post('/calculator', [CalcController::class, '__invoke']);
+// Route::post('/calculator')->uses(CalcController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
