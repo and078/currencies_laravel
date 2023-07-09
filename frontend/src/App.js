@@ -55,7 +55,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='container'>
       <UserInput textValue={usd} currencyName="usd" onChange={handleChange} />
       <UserInput textValue={ron} currencyName="ron" onChange={handleChange} />
       <UserInput textValue={rub} currencyName="rub" onChange={handleChange} />
