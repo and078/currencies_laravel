@@ -19,7 +19,7 @@ class ProcessAction
         $dataFromApi['mdl'] = 1.0;
 
         foreach($dataFromApi as $key => $value) {
-            $arrayToEncode[$key] = ($inputNumber * floatval($dataFromApi[$currentCurrency])) / floatval($value);
+            $arrayToEncode[$key] = round(($inputNumber * floatval($dataFromApi[$currentCurrency])) / floatval($value), 2);
         }
 
         return json_encode($arrayToEncode);

@@ -13,7 +13,7 @@ function App() {
     eur: '0',
     mdl: '0',
   }
- 
+
   const [usd, setUsd] = useState('');
   const [ron, setRon] = useState('');
   const [rub, setRub] = useState('');
@@ -23,8 +23,7 @@ function App() {
   const [mdl, setMdl] = useState('');
 
 
-  const fetchData = async (dataFromUser, currentId) => {
-
+  const fetchData = async (dataFromUser) => {
     await fetch('http://127.0.0.1:8000/api/calculator', {
       method: 'POST',
       headers: {
@@ -46,14 +45,17 @@ function App() {
   }
 
   const handleChange = (e) => {
-    const currentCurrency = e.target.id
+    const currentCurrency = e.target.id;
     userData.current_currency = currentCurrency;
     userData[currentCurrency] = e.target.value;
-    fetchData(userData, e.target.id);
+    for(const [key, value] of Object.entries(userData)) {
+      if (value === '') userData[key] = '0';
+    }
+    fetchData(userData);
   }
 
   return (
-    <div className='container'>
+    <div>
       <UserInput textValue={usd} currencyName="usd" onChange={handleChange} />
       <UserInput textValue={ron} currencyName="ron" onChange={handleChange} />
       <UserInput textValue={rub} currencyName="rub" onChange={handleChange} />

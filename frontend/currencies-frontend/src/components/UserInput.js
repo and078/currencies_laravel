@@ -2,10 +2,10 @@ const UserInput = (props) => {
 
     return (
         <div>
-            <h1>{props.currencyName}</h1>
+            <h3>{props.currencyName}</h3>
             <input
                 className='form-control'
-                type="number" step="0.01"
+                type="text"
                 id={props.currencyName}
                 onInput={props.onChange}
                 value={props.textValue}
