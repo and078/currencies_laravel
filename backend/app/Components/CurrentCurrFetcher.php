@@ -2,18 +2,18 @@
 
 namespace App\Components;
 
-use App\Components\DateCalculator;
-use App\Components\FetchDataClient;
 use App\Services\Factories\FetchDataClientFactory;
 use Exception;
 use Symfony\Component\HttpKernel\Log\Logger;
 
 class CurrentCurrFetcher
 {
+    private const TODAY_OF_PREVIOUS_SEVEN_DAYS = 6;
+    private const CURRENCY_VALUE_FROM_FETCHED_ARRAY = 1;
+
     public function __construct(
         private readonly FetchDataClientFactory $fetcherFactory,
         private readonly DateCalculator $dateCalculator,
-        private readonly Logger $logger,
     ) {
     }
 
@@ -36,12 +36,14 @@ class CurrentCurrFetcher
 
         foreach($dataFromApi as $key => $value) {
             // Get rid of [1], try current(), end()
-            $dataFromApiReducedArray[$key] = $value[6][1];
+            $dataFromApiReducedArray[$key] = $value[self::TODAY_OF_PREVIOUS_SEVEN_DAYS][self::CURRENCY_VALUE_FROM_FETCHED_ARRAY];
+//            $temp = end($value);
+//            $dataFromApiReducedArray[$key] = end($temp);
+//            unset($temp);
         }
 
         unset($dataFromApi);
 
         return $dataFromApiReducedArray;
-
     }
 }

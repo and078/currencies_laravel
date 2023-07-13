@@ -9,6 +9,8 @@ class Calculation extends Model
 {
     use HasFactory;
 
+    protected $table = 'calculations';
+
     protected $fillable = [
         'current_currency',
         'usd',

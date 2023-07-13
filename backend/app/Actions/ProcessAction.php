@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Components\CurrentCurrFetcher;
+use App\Services\Factories\DataBaseSaverFactory;
 use Symfony\Component\HttpKernel\Log\Logger;
 use Exception;
 
@@ -14,6 +15,7 @@ class ProcessAction
      */
     public function __construct(
         private readonly CurrentCurrFetcher $fetcher,
+        private  readonly DataBaseSaverFactory $dbSaverFactory,
         private readonly Logger $logger,
     ) {
     }
@@ -28,7 +30,7 @@ class ProcessAction
                 'current_currency' => $currentCurrency,
             ] = $inputData;
 
-            $inputNumber = floatval($currentCurrency);
+            $inputNumber = floatval($inputData[$currentCurrency]);
 
             $dataFromApi = $this->fetcher->fetchData();
 
@@ -36,10 +38,12 @@ class ProcessAction
 
             $dataFromApi['mdl'] = 1.0;
 
-
             foreach ($dataFromApi as $key => $value) {
                 $arrayToEncode[$key] = round(($inputNumber * floatval($dataFromApi[$currentCurrency])) / floatval($value), 2);
             }
+
+            $dbSaver = $this->dbSaverFactory->create($arrayToEncode, $currentCurrency);
+            $dbSaver->saveToDb();
 
             return json_encode($arrayToEncode);
         } catch (Exception $exception) {

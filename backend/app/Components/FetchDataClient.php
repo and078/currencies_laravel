@@ -10,7 +10,7 @@ use App\Enums\FetchDataClientConfigEnum;
  */
 class FetchDataClient
 {
-    public $client;
+    private $client;
 
     /**
      * Constructor
@@ -27,7 +27,7 @@ class FetchDataClient
     {
         return new Client([
             'base_uri' => FetchDataClientConfigEnum::BASE_URL,
-            'timeuot' => FetchDataClientConfigEnum::TIMEOUT_IN_SECS,
+            'timeout' => FetchDataClientConfigEnum::TIMEOUT_IN_SECS,
             'verify' => FetchDataClientConfigEnum::VERIFY_STATUS_BOOL,
         ]);
     }

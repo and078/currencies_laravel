@@ -9,7 +9,6 @@ class CalcController extends Controller
 {
     public function __invoke(CurrencyRequest $request, ProcessAction $action)
     {
-
         return $action->handle($request->validated());
     }
 }
