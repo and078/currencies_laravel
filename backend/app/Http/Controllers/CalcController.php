@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\ProcessAction;
 use App\Http\Requests\CurrencyRequest;
+use Illuminate\Support\Facades\Log;
 
 class CalcController extends Controller
 {

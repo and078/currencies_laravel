@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components;
+namespace App\Services;
 
 use GuzzleHttp\Client;
 use App\Enums\FetchDataClientConfigEnum;

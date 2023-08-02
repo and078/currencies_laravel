@@ -2,7 +2,7 @@
 
 namespace App\Services\Factories;
 
-use App\Components\DataBaseSaver;
+use App\Services\DataBaseSaver;
 
 class DataBaseSaverFactory
 {

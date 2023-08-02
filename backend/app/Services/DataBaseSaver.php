@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components;
+namespace App\Services;
 
 use App\Models\Calculation;
 use Exception;

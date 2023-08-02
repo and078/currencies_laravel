@@ -2,7 +2,7 @@
 
 namespace App\Services\Factories;
 
-use App\Components\FetchDataClient;
+use App\Services\FetchDataClient;
 
 class FetchDataClientFactory
 {

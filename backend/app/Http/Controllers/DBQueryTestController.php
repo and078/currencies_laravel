@@ -9,8 +9,11 @@ class DBQueryTestController extends Controller
 {
     public  function __invoke(Request $request)
     {
-        $current = $request->query('current_currency');
-        $collection = Calculation::where('current_currency', $current)->get();
-        return $collection->sortBy($current);
+//        $current = $request->query('current_currency');
+//        $collection = Calculation::where('current_currency', $current)->get();
+//        return $collection->sortBy($current);
+        return Calculation::all()->filter(function ($element) {
+            return ($element->id > 300);
+        })->values();
     }
 }
