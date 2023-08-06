@@ -18,7 +18,6 @@ const Login = () => {
 
   useEffect(() => {
       if (token) {
-        console.log('navigate calc');
         return navigate('/calculator');
       }
     }, [token]);
