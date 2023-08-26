@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('calculations', function (Blueprint $table) {
             $table->id();
             $table->string('current_currency');
-            $table->decimal('usd', 30, 2);
-            $table->decimal('ron', 30, 2);
-            $table->decimal('rub', 30, 2);
-            $table->decimal('uah', 30, 2);
-            $table->decimal('gbp', 30, 2);
-            $table->decimal('eur', 30, 2);
-            $table->decimal('mdl', 30, 2);
+            $table->double('usd', 50, 2);
+            $table->double('ron', 50, 2);
+            $table->double('rub', 50, 2);
+            $table->double('uah', 50, 2);
+            $table->double('gbp', 50, 2);
+            $table->double('eur', 50, 2);
+            $table->double('mdl', 50, 2);
             $table->timestamps();
         });
     }

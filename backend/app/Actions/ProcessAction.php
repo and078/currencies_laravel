@@ -29,9 +29,10 @@ class ProcessAction
         try {
             [
                 'current_currency' => $currentCurrency,
+                'value' => $floatValue,
             ] = $inputData;
 
-            $inputNumber = floatval($inputData[$currentCurrency]);
+            $inputNumber = $floatValue;
 
             $dataFromApiForToday = $this->fetcher->fetchData(0);
 

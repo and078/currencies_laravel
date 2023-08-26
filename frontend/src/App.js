@@ -9,6 +9,7 @@ import Calculator from './components/Calculator';
 
 
 function App() {
+  console.log('App render');
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

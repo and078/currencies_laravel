@@ -1,7 +1,11 @@
+import React, {memo} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
-const UserInput = (props) => {
+
+
+export default memo(function UserInput(props) {
+    console.log(`userinput render ${props.currencyName}`);
 
     return (
         <div className="input-group input-group-sm mb-3">
@@ -17,8 +21,6 @@ const UserInput = (props) => {
                 value={props.textValue}
             />
         </div>
-    )
-}
-
-export default UserInput
+    );
+}); 
 

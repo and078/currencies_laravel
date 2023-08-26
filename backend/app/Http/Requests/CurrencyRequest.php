@@ -24,13 +24,7 @@ class CurrencyRequest extends FormRequest
     {
         return [
             'current_currency' => 'required|string',
-            'usd' => 'required|numeric',
-            'ron' => 'required|numeric',
-            'rub' => 'required|numeric',
-            'uah' => 'required|numeric',
-            'gbp' => 'required|numeric',
-            'eur' => 'required|numeric',
-            'mdl' => 'required|numeric',
+            'value' => 'required|numeric',
         ];
     }
 }
