@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CurrencyRequest extends FormRequest
@@ -17,19 +18,13 @@ class CurrencyRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'current_currency' => 'required|string',
-            'usd' => 'required|numeric',
-            'ron' => 'required|numeric',
-            'rub' => 'required|numeric',
-            'uah' => 'required|numeric',
-            'gbp' => 'required|numeric',
-            'eur' => 'required|numeric',
-            'mdl' => 'required|numeric',
+            'value' => 'required|numeric',
         ];
     }
 }

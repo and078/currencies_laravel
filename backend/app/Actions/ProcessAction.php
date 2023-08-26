@@ -2,26 +2,56 @@
 
 namespace App\Actions;
 
-use App\Components\CurrentCurrFetcher;
+use App\Services\CurrencyFetcher;
+use App\Services\Factories\DataBaseSaverFactory;
+use Symfony\Component\HttpKernel\Log\Logger;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class ProcessAction
 {
-    public function handle($inputData)
+
+    /**
+     * Constructor
+     */
+    public function __construct(
+        private readonly CurrencyFetcher       $fetcher,
+        private  readonly DataBaseSaverFactory $dbSaverFactory,
+        private readonly Logger                $logger,
+    ) {
+    }
+
+    /**
+     * Handles
+     */
+    public function handle(array $inputData)
     {
-        $currentCurrency = $inputData['current_currency'];
+        try {
+            [
+                'current_currency' => $currentCurrency,
+                'value' => $floatValue,
+            ] = $inputData;
 
-        $inputNumber = floatval($inputData[$currentCurrency]);
+            $inputNumber = $floatValue;
 
-        $dataFromApi = CurrentCurrFetcher::fetchData();
+            $dataFromApiForToday = $this->fetcher->fetchData(0);
 
-        $arrayToEncode = array();
+            $arrayToEncode = [];
 
-        $dataFromApi['mdl'] = 1.0;
+            $dataFromApiForToday['mdl'] = 1.0;
 
-        foreach($dataFromApi as $key => $value) {
-            $arrayToEncode[$key] = round(($inputNumber * floatval($dataFromApi[$currentCurrency])) / floatval($value), 2);
+            foreach ($dataFromApiForToday as $key => $value) {
+                $arrayToEncode[$key] = round(($inputNumber * floatval($dataFromApiForToday[$currentCurrency])) / floatval($value), 2);
+            }
+
+            $dbSaver = $this->dbSaverFactory->create($arrayToEncode, $currentCurrency);
+
+            $dbSaver->saveToDb();
+
+            return json_encode($arrayToEncode);
+
+        } catch (Exception $exception) {
+            $this->logger->log('error', $exception);
         }
-
-        return json_encode($arrayToEncode);
     }
 }
