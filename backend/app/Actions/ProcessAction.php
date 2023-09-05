@@ -10,7 +10,6 @@ use Exception;
 
 class ProcessAction
 {
-
     /**
      * Constructor
      */
@@ -47,7 +46,6 @@ class ProcessAction
             $dbSaver = $this->dbSaverFactory->create($arrayToEncode, $currentCurrency);
 
             $dbSaver->saveToDb();
-
             return json_encode($arrayToEncode);
 
         } catch (Exception $exception) {

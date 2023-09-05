@@ -5,14 +5,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 const Calculator = () => {
-    console.log('calculator render');
+    // console.log('calculator render');
 
     const token = useSelector((state) => state.login.user?.token);
 
     const delay = 500;
-
-    // let counterRef = useRef();
-    // counterRef = 0;
 
     const userDataForSendToAPI = {
         current_currency: '',
@@ -20,7 +17,7 @@ const Calculator = () => {
     }
 
     const [currencyNameToSend, setCurrencyNameToSend] = useState('');
-    const [valueToSend, setValueToSend] = useState(0);
+    const [valueToSend, setValueToSend] = useState(0.0);
 
     const [usd, setUsd] = useState('');
     const [ron, setRon] = useState('');
@@ -74,7 +71,6 @@ const Calculator = () => {
             try {
                 if(valueToSend) {
                     fetchData(userDataForSendToAPI);
-                    console.log('!!!!!!data was sended to a server!!!!!!!');
                 }
             }
             catch(e) {
@@ -85,7 +81,6 @@ const Calculator = () => {
 
         return () => {
             clearTimeout(debounceTimeout);
-            console.log('calculator will unmounth now');
         };
     }, [valueToSend]);
 

@@ -39,11 +39,7 @@ class CurrencyFetcher
         $dataFromApiReducedArray = [];
 
         foreach($dataFromApi as $key => $value) {
-            // Get rid of [1], try current(), end()
             $dataFromApiReducedArray[$key] = $value[$daysAgo][self::CURRENCY_VALUE_FROM_FETCHED_ARRAY];
-//            $temp = end($value);
-//            $dataFromApiReducedArray[$key] = end($temp);
-//            unset($temp);
         }
 
         unset($dataFromApi);

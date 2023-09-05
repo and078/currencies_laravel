@@ -13,7 +13,7 @@ class DBQueryTestController extends Controller
 //        $collection = Calculation::where('current_currency', $current)->get();
 //        return $collection->sortBy($current);
         return Calculation::all()->filter(function ($element) {
-            return ($element->id > 300);
+            return ($element->id < 300);
         })->values();
     }
 }

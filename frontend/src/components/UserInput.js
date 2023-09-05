@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 
 export default memo(function UserInput(props) {
-    console.log(`userinput render ${props.currencyName}`);
+    // console.log(`userinput render ${props.currencyName}`);
 
     return (
         <div className="input-group input-group-sm mb-3">

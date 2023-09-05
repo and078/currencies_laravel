@@ -20,7 +20,7 @@ class DataBaseSaver
         private readonly string $currentCurrency,
     )
     {
-        $this->arrayToSaveInDB = array("current_currency" => $this->currentCurrency) + $this->arrayFromAPI;
+        $this->arrayToSaveInDB = array("user_id" => auth()->user()->id, "current_currency" => $this->currentCurrency) + $this->arrayFromAPI; //
         $this->logger = new Logger();
     }
 

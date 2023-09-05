@@ -6,10 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import Home from './components/Home';
 import Calculator from './components/Calculator';
+// import AdminPanel from './components/admin/AdminPanel';
 
 
 function App() {
-  console.log('App render');
+  // console.log('App render');
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
