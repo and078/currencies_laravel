@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import CalculationsTable from './CalculationsTable';
 
 const UsersTable = ({ data }) => {
@@ -21,13 +21,11 @@ const UsersTable = ({ data }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setCalculationsFromApi(data);
             });
     }
 
     useEffect(() => {
-        console.log(userId);
         fetchCalculations({ id: userId });
     }, [userId]);
 
@@ -37,6 +35,10 @@ const UsersTable = ({ data }) => {
             setShowCalculations(false);
     }, [calculationsFromApi]);
 
+    const handleClick = (id) => {
+        setUserId(id);
+        fetchCalculations({ id: id });
+    }
 
     return (
         <>
@@ -44,7 +46,7 @@ const UsersTable = ({ data }) => {
                 <CalculationsTable calculationsFromApi={calculationsFromApi} onTableClick={() => setShowCalculations(false)}/> :
                 (
                     <div className='container mt-3'>
-                        <table class="table table-striped table-light">
+                        <table class="table table-striped table-light table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
@@ -55,7 +57,7 @@ const UsersTable = ({ data }) => {
                             <tbody>
                                 {
                                     data.map(item => (
-                                        <tr key={item.id} onClick={() => setUserId(item.id)}>
+                                        <tr key={item.id} onClick={() => handleClick(item.id)}>
                                             <th scope="row">{item.id}</th>
                                             <td>{item.name}</td>
                                             <td>{item.email}</td>

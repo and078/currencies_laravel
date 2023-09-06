@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import UsersTable from './UsersTable';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import UsersTable from './UsersTable';
+
 
 const AdminPanel = () => {
     const token = useSelector((state) => state.login.user?.token);
@@ -10,7 +11,6 @@ const AdminPanel = () => {
     const [userName, setUserName] = useState('');
     const [usersFromApi, setUsersFromApi] = useState([]);
     const [showTable, setShowTable] = useState(false);
-
 
     const delay = 500;
 
@@ -27,7 +27,6 @@ const AdminPanel = () => {
             .then(res => res.json())
             .then(data => {
                 setUsersFromApi(data);
-                console.log(data);
             });
     }
 

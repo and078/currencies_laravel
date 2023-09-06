@@ -37,7 +37,12 @@ const Login = () => {
     console.log(`token ${token} badCreds ${badCredencials}`);
 
     if (email.trim().length && password.trim().length) {
-      dispatch(fetchUserLogin({ email, password }));
+      try{
+        dispatch(fetchUserLogin({ email, password }));
+      }
+      catch(err){
+        console.log(err);
+      }
       setUsername('');
       setPassword('');
     }
