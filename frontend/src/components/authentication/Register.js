@@ -29,12 +29,7 @@ const Register = () => {
       && password_confirmation.trim().length) {
         dispatch(fetchUserRegister({ name, email, password, password_confirmation }));
     }
-
-    setName('');
-    setEmail('');
-    setPassword('');
-    setPasswordConfirmation('');
-
+    
     return navigate('/login');
   };
 

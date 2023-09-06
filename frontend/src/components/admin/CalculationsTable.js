@@ -1,10 +1,22 @@
 import React from 'react'
 
 const CalculationsTable = ( {calculationsFromApi, onTableClick} ) => {
+
+    const toGTM = (hours, gtmOffsetHours) => {
+        const sum = Number(hours) + gtmOffsetHours;
+        if (sum >= 24) return sum % 24;
+        return sum;
+    }
+
+    const formatDate = (inputTimeStamp) => {
+        const parts = inputTimeStamp.split(/[- : T .]/);
+        return `${toGTM(parts[3], 3)}:${parts[4]}:${parts[5]} ${parts[2]}-${parts[1]}-${parts[0]}`
+    }
+
     return (
         <>
             <div className='container mt-3'>
-                <table class="table table-striped table-light">
+                <table class="table table-striped table-light table-hover"  onClick={onTableClick}>
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -16,9 +28,10 @@ const CalculationsTable = ( {calculationsFromApi, onTableClick} ) => {
                             <th scope="col">GBP</th>
                             <th scope="col">EUR</th>
                             <th scope="col">MDL</th>
+                            <th scope="col">Created date</th>
                         </tr>
                     </thead>
-                    <tbody onClick={onTableClick}>
+                    <tbody>
                         {
                             calculationsFromApi.map(item => (
                                 <tr key={item.id}>
@@ -31,6 +44,7 @@ const CalculationsTable = ( {calculationsFromApi, onTableClick} ) => {
                                     <td>{item.gbp}</td>
                                     <td>{item.eur}</td>
                                     <td>{item.mdl}</td>
+                                    <td>{formatDate(item.created_at)}</td>
                                 </tr>
                             ))
                         }
