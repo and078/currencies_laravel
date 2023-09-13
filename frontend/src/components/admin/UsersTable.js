@@ -10,19 +10,25 @@ const UsersTable = ({ data }) => {
     const [showCalculations, setShowCalculations] = useState(false);
 
     const fetchCalculations = async (body) => {
-        await fetch('http://127.0.0.1:8000/api/admin/search_user_by_id', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': "application/json",
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(body),
-        })
-            .then(res => res.json())
-            .then(data => {
-                setCalculationsFromApi(data);
-            });
+        try {
+            await fetch('http://127.0.0.1:8876/api/admin/search_user_by_id', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': "application/json",
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(body),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setCalculationsFromApi(data);
+                });
+        }
+        catch (err) {
+            console.log(err);
+        }
+
     }
 
     useEffect(() => {
@@ -30,7 +36,8 @@ const UsersTable = ({ data }) => {
     }, [userId]);
 
     useEffect(() => {
-        calculationsFromApi.length > 0 ? 
+        // if (calculationsFromApi === 0 ) alert('This user has no calculations!');
+        calculationsFromApi.length > 0 ?
             setShowCalculations(true) :
             setShowCalculations(false);
     }, [calculationsFromApi]);
@@ -43,7 +50,7 @@ const UsersTable = ({ data }) => {
     return (
         <>
             {(showCalculations ?
-                <CalculationsTable calculationsFromApi={calculationsFromApi} onTableClick={() => setShowCalculations(false)}/> :
+                <CalculationsTable calculationsFromApi={calculationsFromApi} onTableClick={() => setShowCalculations(false)} /> :
                 (
                     <div className='container mt-3'>
                         <table class="table table-striped table-light table-hover">

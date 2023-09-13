@@ -14,10 +14,11 @@ class ProcessAction
      * Constructor
      */
     public function __construct(
-        private readonly CurrencyFetcher       $fetcher,
-        private  readonly DataBaseSaverFactory $dbSaverFactory,
-        private readonly Logger                $logger,
-    ) {
+        private readonly CurrencyFetcher $fetcher,
+        private readonly DataBaseSaverFactory $dbSaverFactory,
+        private readonly Logger $logger,
+    )
+    {
     }
 
     /**

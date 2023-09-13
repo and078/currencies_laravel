@@ -4,7 +4,7 @@ export const fetchUserRegister = createAsyncThunk(
     'register/fetchUserRegister',
     async (bodyToRegister) => {
         const response = await fetch(
-            'http://127.0.0.1:8000/api/register', {
+            'http://127.0.0.1:8876/api/register', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

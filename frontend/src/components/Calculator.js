@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import UserInput from './UserInput';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 const Calculator = () => {
-    // console.log('calculator render');
 
     const token = useSelector((state) => state.login.user?.token);
 
-    const delay = 500;
+    const delay = 300;
 
     const userDataForSendToAPI = {
         current_currency: '',
@@ -48,7 +47,8 @@ const Calculator = () => {
     }
 
     const fetchData = async (dataFromUser) => {
-        await fetch('http://127.0.0.1:8000/api/calculator', {
+        try {
+            await fetch('http://127.0.0.1:8876/api/calculator', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,6 +61,11 @@ const Calculator = () => {
             .then(data => {
                 callSetsWithDataFromAPI(data);
             });
+        }
+        catch(err) {
+            console.log(err);
+        }
+        
     }
 
     useEffect(() => {

@@ -5,14 +5,15 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 
 export default memo(function UserInput(props) {
-    // console.log(`userinput render ${props.currencyName}`);
 
     return (
         <div className="input-group input-group-sm mb-3">
             <span className="input-group-text" id="inputGroup-sizing-sm">{props.currencyName}</span>
             <input
                 className='form-control'
+                // inputmode="numeric"
                 type="text"
+                // pattern="[0-9]*.*"
                 aria-label="Sizing example input" 
                 aria-describedby="inputGroup-sizing-sm"
                 id={props.currencyName}

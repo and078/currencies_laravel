@@ -12,10 +12,11 @@ const AdminPanel = () => {
     const [usersFromApi, setUsersFromApi] = useState([]);
     const [showTable, setShowTable] = useState(false);
 
-    const delay = 500;
+    const delay = 0;
 
     const fetchUsers = async (body) => {
-        await fetch('http://127.0.0.1:8000/api/admin/search_user', {
+        try {
+            await fetch('http://127.0.0.1:8876/api/admin/search_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,6 +29,10 @@ const AdminPanel = () => {
             .then(data => {
                 setUsersFromApi(data);
             });
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
 
     useEffect(() => {

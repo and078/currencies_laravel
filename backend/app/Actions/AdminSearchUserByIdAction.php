@@ -13,7 +13,17 @@ class AdminSearchUserByIdAction
     public function handle(array $id): array
     {
         return Calculation::where('user_id', $id)
-            ->select('id', 'current_currency', 'usd', 'ron', 'rub', 'uah', 'gbp', 'eur', 'mdl', 'created_at')
+            ->select('id',
+                'current_currency',
+                'usd',
+                'ron',
+                'rub',
+                'uah',
+                'gbp',
+                'eur',
+                'mdl',
+                'created_at',
+            )
             ->get()
             ->toArray();
     }

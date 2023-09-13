@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Header from './components/Header';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
 import Home from './components/Home';
 import Calculator from './components/Calculator';
-// import AdminPanel from './components/admin/AdminPanel';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+
 
 
 function App() {
-  // console.log('App render');
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.login.user?.token);
@@ -27,7 +24,6 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home /> }/>
-        <Route path='/calculator' element={<Calculator />} />
       </Routes>
     </>
   );

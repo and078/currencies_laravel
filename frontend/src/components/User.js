@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { formatDate } from '../helpers/timeFormatter'
 
 const User = () => {
 
@@ -19,12 +20,14 @@ const User = () => {
                     </thead>
                     <tbody>
                         {
-                            <tr>
+                            user && (
+                                <tr>
                                 <th scope="row">{user.id}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.created_at}</td>
+                                <td>{formatDate(user.created_at)}</td>
                             </tr>
+                            )
                         }
                     </tbody>
                 </table>

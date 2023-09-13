@@ -12,8 +12,6 @@ class DBQueryTestController extends Controller
 //        $current = $request->query('current_currency');
 //        $collection = Calculation::where('current_currency', $current)->get();
 //        return $collection->sortBy($current);
-        return Calculation::all()->filter(function ($element) {
-            return ($element->id < 300);
-        })->values();
+        return Calculation::all()->first();
     }
 }

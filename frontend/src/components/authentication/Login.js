@@ -7,7 +7,6 @@ import 'bootstrap/dist/js/bootstrap.js';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  console.log('login render');
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,8 +33,6 @@ const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    console.log(`token ${token} badCreds ${badCredencials}`);
-
     if (email.trim().length && password.trim().length) {
       try{
         dispatch(fetchUserLogin({ email, password }));
@@ -43,6 +40,7 @@ const Login = () => {
       catch(err){
         console.log(err);
       }
+
     }
   }
 

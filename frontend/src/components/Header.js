@@ -8,6 +8,8 @@ import AdminPanel from './admin/AdminPanel';
 import User from './User';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import Calculator from './Calculator';
+import Home from './Home';
 
 
 export default memo(function Header() {
@@ -20,7 +22,7 @@ export default memo(function Header() {
 
   useEffect(() => {
     dispatch(() => setLoggedIn(token));
-  }, [dispatch, token]);
+  }, [token]);
 
   return (
     <>
@@ -34,7 +36,13 @@ export default memo(function Header() {
           {
             loggedIn &&
             <li className="nav-item container">
-              <Link className="navbar-brand" to="/user">{userName}</Link>
+              <Link className="navbar-brand" to="/admin/user">{userName}</Link>
+            </li>
+          }
+          {
+            loggedIn &&
+            <li className="nav-item container">
+              <Link className="navbar-brand" to="/calculator">Calculator</Link>
             </li>
           }
           {(!loggedIn) ? (
@@ -55,7 +63,6 @@ export default memo(function Header() {
                   <li className="nav-item" >
                     <Logout />
                   </li>
-
                 </ul>
               </div>
             )
@@ -67,7 +74,9 @@ export default memo(function Header() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/admin/user" element={<User />} />
+        <Route path="/calculator" element={<Calculator />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </>
   )

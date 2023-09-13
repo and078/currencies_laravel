@@ -11,19 +11,19 @@ use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Admin\AdminSearchUserController;
 
 
-
-Route::group(['middleware' =>['auth:sanctum']], function () {
-    Route::group(['middleware' => 'admin'], function() {
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['middleware' => 'admin'], function () {
         Route::post('/admin/search_user')->uses(AdminSearchUserController::class);
-            Route::post('/admin/search_user_by_id')->uses(AdminSearchUserByIdController::class);
+        Route::post('/admin/search_user_by_id')->uses(AdminSearchUserByIdController::class);
     });
-    Route::get('/test')->uses(DBQueryTestController::class);
+//    Route::get('/test')->uses(DBQueryTestController::class);
     Route::post('/calculator')->uses(CalcController::class);
     Route::post('/logout')->uses(LogoutController::class);
 });
 
 Route::post('/register')->uses(RegisterController::class);
 Route::post('/login')->uses(LoginController::class);
+Route::get('/test')->uses(DBQueryTestController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
