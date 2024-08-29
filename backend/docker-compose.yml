@@ -39,12 +39,7 @@ services:
         container_name: currencies_db
 
     frontend:
-#        image: react-app-image:1
-#        image: airbyte/source-outreach:latest
-
         build: ./react_frontend
-#             context: ./react_frontend
-#             dockerfile: ./react_frontend/Dockerfile
         volumes:
             - './react_frontend:/app'
             - '/app/node_modules'
@@ -52,5 +47,5 @@ services:
             - "5001:3000"
         container_name: frontend_container
         tty: true
-#        stdin_open: true
+        stdin_open: true
 
