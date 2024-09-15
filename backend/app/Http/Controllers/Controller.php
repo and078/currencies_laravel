@@ -8,11 +8,16 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\Info(
- *     title="Dock Api",
+ *     title="Currencies calculator Api",
  *     version="1.0.0"
  * ),
  * @OA\PathItem(
  *     path="api/"
+ * ),
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer"
  * ),
  */
 

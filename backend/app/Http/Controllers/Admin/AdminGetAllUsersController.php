@@ -8,8 +8,8 @@ use App\Http\Requests\AdminGetAllUsersRequest;
 
 class AdminGetAllUsersController extends Controller
 {
-    public function __invoke(AdminGetAllUsersAction $action, AdminGetAllUsersRequest $request)
+    public function __invoke(AdminGetAllUsersAction $action)
     {
-        return $action->handle($request->validated());
+        return $action->handle();
     }
 }

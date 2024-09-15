@@ -1,10 +1,277 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Dock Api",
+        "title": "Currencies calculator Api",
         "version": "1.0.0"
     },
     "paths": {
-        "api/": {}
-    }
+        "api/": {},
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "User login",
+                "operationId": "438dd7eefa196ae9125528df3c89997a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "email@email"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "password"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "name"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "email@email"
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "role"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-13T14:02:36.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "023-09-13T14:02:36.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "Bearer_token"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "User register",
+                "operationId": "4dc6cc2868c8ad1dd67bc69813d592e7",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "name"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "email@email.com"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "password"
+                                            },
+                                            "password_confirmation": {
+                                                "type": "string",
+                                                "example": "password"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "name"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "email@email"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "023-09-13T14:02:36.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-13T14:02:36.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "Bearer_token"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/calculator": {
+            "post": {
+                "tags": [
+                    "Calculation"
+                ],
+                "summary": "Calculates currencies for actual currency",
+                "operationId": "83f540bd73efd3b23869aebabf1e5ccc",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "current_currency": {
+                                                "type": "string",
+                                                "example": "eur"
+                                            },
+                                            "value": {
+                                                "type": "numeric",
+                                                "example": 100
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "usd": {
+                                            "type": "numeric",
+                                            "example": 5.76
+                                        },
+                                        "ron": {
+                                            "type": "numeric",
+                                            "example": 25.86
+                                        },
+                                        "rub": {
+                                            "type": "numeric",
+                                            "example": 524.93
+                                        },
+                                        "uah": {
+                                            "type": "numeric",
+                                            "example": 236.41
+                                        },
+                                        "gbp": {
+                                            "type": "numeric",
+                                            "example": 4.37
+                                        },
+                                        "eur": {
+                                            "type": "numeric",
+                                            "example": 5.2
+                                        },
+                                        "mdl": {
+                                            "type": "numeric",
+                                            "example": 100
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Login",
+            "description": "Login"
+        },
+        {
+            "name": "Register",
+            "description": "Register"
+        },
+        {
+            "name": "Calculation",
+            "description": "Calculation"
+        }
+    ]
 }
