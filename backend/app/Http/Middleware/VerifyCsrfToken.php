@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://127.0.0.1:8876/api/*',
-    	'http://192.168.1.10:8876/api/*',
+	'http://192.168.1.224:8876/api/*',
+	'https://back.serveo.net/api/*'
     ];
 }
