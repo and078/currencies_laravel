@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
+use App\Actions\Authentication\RegisterAction;
 
 /**
  * @OA\Post(
@@ -45,30 +47,31 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    public function __invoke (Request $request)
+    public function __invoke (RegisterRequest $request, RegisterAction $action)
     {
-        // move to a separate form request
-        $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
-        ]);
+        // // move to a separate form request
+        // $fields = $request->validate([
+        //     'name' => 'required|string',
+        //     'email' => 'required|string|unique:users,email',
+        //     'password' => 'required|string|confirmed'
+        // ]);
 
 
-        // move to factory
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password']),
-        ]);
+        // // move to factory
+        // $user = User::create([
+        //     'name' => $fields['name'],
+        //     'email' => $fields['email'],
+        //     'password' => bcrypt($fields['password']),
+        // ]);
 
-        $token = $user->createToken('myAppToken')->plainTextToken;
+        // $token = $user->createToken('myAppToken')->plainTextToken;
 
-        $response = [
-            'user' => $user,
-            'token' => $token,
-        ];
+        // $response = [
+        //     'user' => $user,
+        //     'token' => $token,
+        // ];
 
-        return response($response, 200);
+        // return response($response, 200);
+        return $action->handle($request->validated());
     }
 }
